@@ -16,7 +16,10 @@ export class NotificationService {
     ){}
     
     async sendNotification(category: string, message: string): Promise<void>{
-        const users = await this.userRepository.find({where: { subscribedCategories: category}});
+        const users = await this.userRepository
+            .createQueryBuilder('user')
+            .where(':category = ANY (user.subscribedCategories)', { category })
+            .getMany();
         
         for(const user of users) {
             for (const channel of user.channels){
