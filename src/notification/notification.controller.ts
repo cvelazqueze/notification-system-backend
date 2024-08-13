@@ -7,6 +7,7 @@ export class NotificationController {
 
     @Post()
     async sendNotification(@Body() body: { category: string; message: string}){
+        console.log('inside sendNotification')
         await this.notificationService.sendNotification(body.category, body.message)
         return { message: 'Notification sent succesfully'};
     }    

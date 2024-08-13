@@ -20,4 +20,4 @@ RUN npm run build
 EXPOSE 3001
 
 # Define the command to run the application
-CMD ["npm", "run", "start:prod"]
+CMD npm run seed && npm run start:prod
